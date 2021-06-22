@@ -15,6 +15,8 @@ class HashTable {
 				}
 			}
 		}
+
+		return null
 	}
 
 	set(key, data) {
@@ -25,6 +27,24 @@ class HashTable {
 		}
 
 		this.data[hashKey].push([key, data])
+	}
+
+	keys() {
+		let dataArray = []
+
+		for (const array of this.data) {
+			if (Array.isArray(array)) {
+				if (array.length === 0) {
+					dataArray.push(array[0])
+					return
+				}
+				// now loop collisions
+				for (const innerArray of array) {
+					dataArray.push(innerArray)
+				}
+			}
+		}
+		return dataArray
 	}
 
 	private _hash(key): number {
@@ -38,7 +58,8 @@ class HashTable {
 	}
 }
 
-const ht = new HashTable(50)
+const ht = new HashTable(1)
 
 ht.set('Mazzy', 2.5)
-console.log(ht.get('Mazzy'))
+ht.set('Odie', 3.25)
+console.log(ht.keys())

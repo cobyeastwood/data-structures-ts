@@ -5,7 +5,7 @@ class HashTable {
 		this.data = new Array(size)
 	}
 
-	get(key) {
+	get(key): unknown {
 		let hashKey = this._hash(key)
 
 		if (this.data[hashKey]) {
@@ -19,7 +19,7 @@ class HashTable {
 		return null
 	}
 
-	set(key, data) {
+	set(key, data): void {
 		let hashKey = this._hash(key)
 
 		if (!this.data[hashKey]) {
@@ -29,7 +29,7 @@ class HashTable {
 		this.data[hashKey].push([key, data])
 	}
 
-	keys() {
+	keys(): unknown[] {
 		let dataArray = []
 
 		for (const array of this.data) {

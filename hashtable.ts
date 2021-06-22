@@ -1,5 +1,5 @@
 class HashTable {
-	data: number[]
+	data: any[][]
 
 	constructor(public size: number) {
 		this.data = new Array(size)
@@ -7,12 +7,24 @@ class HashTable {
 
 	get(key) {
 		let hashKey = this._hash(key)
-		return this.data[hashKey]
+
+		if (this.data[hashKey]) {
+			for (const [keys, datas] of this.data[hashKey]) {
+				if (keys === key) {
+					return datas
+				}
+			}
+		}
 	}
 
 	set(key, data) {
 		let hashKey = this._hash(key)
-		this.data[hashKey] = data
+
+		if (!this.data[hashKey]) {
+			this.data[hashKey] = []
+		}
+
+		this.data[hashKey].push([key, data])
 	}
 
 	private _hash(key): number {
